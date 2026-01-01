@@ -10,13 +10,13 @@ dotenv.config();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
+// Parse JSON bodies
 app.use(express.json());
+
+// CORS (utile pour tests locaux ou fetch depuis un autre domaine)
 app.use(cors());
 
-// Serve static files from the dist folder (React build)
-app.use(express.static(path.join(__dirname, "dist")));
-
-// Configure le transporteur Nodemailer
+// Nodemailer
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST || "smtp.ionos.fr",
   port: parseInt(process.env.EMAIL_PORT) || 587,
@@ -27,15 +27,18 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Vérification SMTP
 transporter.verify((error, success) => {
   if (error) console.error("Erreur SMTP:", error);
   else console.log("Serveur SMTP prêt !");
 });
 
+// -----------------------------
+// 1️⃣ Routes API
+// -----------------------------
 app.post("/api/contact", async (req, res) => {
   const { name, email, message } = req.body;
 
-  // Validation basique
   if (!name || !email || !message) {
     return res.status(400).json({ message: "Tous les champs sont requis" });
   }
@@ -62,12 +65,21 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
-// Serve React app for all other routes (Express 5)
+// -----------------------------
+// 2️⃣ Serve React build
+// -----------------------------
+app.use(express.static(path.join(__dirname, "dist")));
+
+// -----------------------------
+// 3️⃣ Catch-all pour React Router
+// -----------------------------
 app.all(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
-
+// -----------------------------
+// 4️⃣ Lancement serveur
+// -----------------------------
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Serveur lancé sur le port ${PORT}`);
