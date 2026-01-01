@@ -11,35 +11,20 @@ export const ContactSection = () => {
     email: "",
     message: "",
   });
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      toast({
-        title: "Message envoyé !",
-        description: "Merci pour votre message ! Je vous répondrai dès que possible.",
-      });
-      setIsSubmitting(false);
-    }, 1500);
-
     try {
-      // Utilise le même domaine que le frontend (fonctionne partout)
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
@@ -57,7 +42,7 @@ export const ContactSection = () => {
         });
       }
     } catch (error) {
-      console.error("Erreur:", error);
+      console.error(error);
       toast({
         title: "Erreur",
         description: "Impossible d'envoyer le message.",
@@ -69,20 +54,20 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 px-4 relative bg-secondary/30">
+    <section id="contact" className="py-24 px-4 sm:px-6 bg-secondary/30">
       <div className="container mx-auto max-w-5xl">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
           Contactez-<span className="text-primary">moi</span>
         </h2>
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Vous avez un projet en tête ou souhaitez simplement échanger ? N'hésitez pas à me contacter par mail ou sur LinkedIn.
+          Vous avez un projet en tête ou souhaitez simplement échanger ? N'hésitez pas à me contacter via le formulaire de contact, par mail ou sur LinkedIn.
         </p>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="space-y-8">
-            <h3 className="text-2xl font-semibold mb-6">
-              Informations de contact
-            </h3>
-            <div className="space-y-6 justify-center">
+          {/* Informations de contact */}
+          <div className="space-y-8 flex flex-col justify-center">
+            <h3 className="text-2xl font-semibold mb-6">Informations de contact</h3>
+            <div className="space-y-6">
               <div className="flex items-start space-x-4">
                 <div className="p-3 rounded-full bg-primary/10">
                   <Mail className="h-6 w-6 text-primary" />
@@ -92,18 +77,21 @@ export const ContactSection = () => {
                   <a
                     href="mailto:contact@maximegougat.com"
                     className="text-muted-foreground hover:text-primary transition-colors"
+                    aria-label="Envoyer un email à Maxime Gougat"
                   >
                     contact@maximegougat.com
                   </a>
                 </div>
               </div>
-              <div className="pt-8">
+
+              <div>
                 <h4 className="font-medium mb-4">Connectez-vous avec moi</h4>
-                <div className="flex space-x-4 justify-center">
+                <div className="flex space-x-4">
                   <a
                     href="https://www.linkedin.com/in/maxime-gougat"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Visiter mon profil LinkedIn"
                   >
                     <Linkedin />
                   </a>
@@ -112,10 +100,9 @@ export const ContactSection = () => {
             </div>
           </div>
 
-          <div className="bg-card p-8 rounded-lg shadow-xs" onSubmit={handleSubmit}>
-            <h3 className="text-2xl font-semibold mb-6">
-              Envoyer un message
-            </h3>
+          {/* Formulaire */}
+          <div className="bg-card p-8 rounded-lg shadow-md">
+            <h3 className="text-2xl font-semibold mb-6">Envoyer un message</h3>
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -128,10 +115,11 @@ export const ContactSection = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Prénom NOM"
                 />
               </div>
+
               <div>
                 <label htmlFor="email" className="block text-sm font-medium mb-2">
                   Votre adresse e-mail
@@ -143,10 +131,11 @@ export const ContactSection = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="prenom.nom@domaine.fr"
                 />
               </div>
+
               <div>
                 <label htmlFor="message" className="block text-sm font-medium mb-2">
                   Votre message
@@ -157,17 +146,17 @@ export const ContactSection = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  rows="5"
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary resize-none"
+                  rows={5}
+                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none"
                   placeholder="Bonjour, j'ai des questions sur votre parcours"
                 />
               </div>
+
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={cn(
-                  "cosmic-button w-full flex items-center justify-center gap-2",
-                )}
+                aria-busy={isSubmitting}
+                className={cn("cosmic-button w-full flex items-center justify-center gap-2")}
               >
                 <Send size={16} />
                 {isSubmitting ? "Envoi en cours..." : "Envoyer le message"}
