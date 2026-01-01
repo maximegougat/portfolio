@@ -55,115 +55,111 @@ export const ContactSection = () => {
 
   return (
     <section id="contact" className="py-24 px-4 sm:px-6 bg-secondary/30">
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          Contactez-<span className="text-primary">moi</span>
-        </h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Vous avez un projet en tête ou souhaitez simplement échanger ? N'hésitez pas à me contacter via le formulaire de contact, par mail ou sur LinkedIn.
-        </p>
+      <div className="container mx-auto max-w-3xl flex flex-col items-center space-y-12">
+        {/* Titre */}
+        <div className="text-center space-y-4">
+          <h2 className="text-3xl md:text-4xl font-bold">
+            Contactez-<span className="text-primary">moi</span>
+          </h2>
+          <p className="text-muted-foreground">
+            Vous avez un projet en tête ou souhaitez simplement échanger ? N'hésitez pas à me contacter par mail ou sur LinkedIn.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Informations de contact */}
-          <div className="space-y-8 flex flex-col justify-center">
-            <h3 className="text-2xl font-semibold mb-6">Informations de contact</h3>
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Mail className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-medium">E-mail</h4>
-                  <a
-                    href="mailto:contact@maximegougat.com"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    aria-label="Envoyer un email à Maxime Gougat"
-                  >
-                    contact@maximegougat.com
-                  </a>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="font-medium mb-4">Connectez-vous avec moi</h4>
-                <div className="flex space-x-4">
-                  <a
-                    href="https://www.linkedin.com/in/maxime-gougat"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Visiter mon profil LinkedIn"
-                  >
-                    <Linkedin />
-                  </a>
-                </div>
-              </div>
+        {/* Informations de contact */}
+        <div className="flex flex-col items-center space-y-8 w-full">
+          {/* E-mail */}
+          <div className="flex items-center space-x-4">
+            <div className="p-3 rounded-full bg-primary/10">
+              <Mail className="h-6 w-6 text-primary" />
             </div>
+            <a
+              href="mailto:contact@maximegougat.com"
+              className="text-muted-foreground hover:text-primary transition-colors"
+              aria-label="Envoyer un email à Maxime Gougat"
+            >
+              contact@maximegougat.com
+            </a>
           </div>
 
-          {/* Formulaire */}
-          <div className="bg-card p-8 rounded-lg shadow-md">
-            <h3 className="text-2xl font-semibold mb-6">Envoyer un message</h3>
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2">
-                  Votre nom
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="Prénom NOM"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2">
-                  Votre adresse e-mail
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="prenom.nom@domaine.fr"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2">
-                  Votre message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none"
-                  placeholder="Bonjour, j'ai des questions sur votre parcours"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                aria-busy={isSubmitting}
-                className={cn("cosmic-button w-full flex items-center justify-center gap-2")}
-              >
-                <Send size={16} />
-                {isSubmitting ? "Envoi en cours..." : "Envoyer le message"}
-              </button>
-            </form>
+          {/* LinkedIn */}
+          <div className="flex flex-col items-center space-y-4">
+            <h4 className="font-medium text-lg">Connectez-vous avec moi</h4>
+            <a
+              href="https://www.linkedin.com/in/maxime-gougat"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visiter mon profil LinkedIn"
+              className="text-primary hover:text-primary/80 transition"
+            >
+              <Linkedin size={40} />
+            </a>
           </div>
         </div>
+
+        {/* Formulaire de contact */}
+        {/*<div className="bg-card p-8 rounded-lg shadow-md w-full max-w-xl">
+          <h3 className="text-2xl font-semibold mb-6 text-center">Envoyer un message</h3>
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium mb-2">
+                Votre nom
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                placeholder="Prénom NOM"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
+                Votre adresse e-mail
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                placeholder="prenom.nom@domaine.fr"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium mb-2">
+                Votre message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={5}
+                className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+                placeholder="Bonjour, j'ai des questions sur votre parcours"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              aria-busy={isSubmitting}
+              className={cn("cosmic-button w-full flex items-center justify-center gap-2")}
+            >
+              <Send size={16} />
+              {isSubmitting ? "Envoi en cours..." : "Envoyer le message"}
+            </button>
+          </form>
+        </div>*/}
       </div>
     </section>
   );
