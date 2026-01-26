@@ -3,9 +3,7 @@ import { Home } from "./pages/accueil.jsx"
 import { NotFound } from "./pages/NotFound"
 import { Toaster } from "react-hot-toast"
 import LegalNoticePage from "./pages/mentions-legales"
-import { injectSpeedInsights } from "@vercel/speed-insights"
-
-injectSpeedInsights();
+import { SpeedInsights } from "@vercel/speed-insights/react"
 function App() {
 
   return (
@@ -18,6 +16,7 @@ function App() {
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </BrowserRouter>
+      <SpeedInsights/>
     </>
   )
 }
