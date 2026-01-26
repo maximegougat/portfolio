@@ -1,11 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { Home } from "./pages/accueil.jsx"
+import { Home } from "./pages/Home"
 import { NotFound } from "./pages/NotFound"
 import { Toaster } from "react-hot-toast"
-import LegalNoticePage from "./pages/mentions-legales"
-import { injectSpeedInsights } from "@vercel/speed-insights"
+import { LegalNoticePage } from "./pages/LegalNotices"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
-injectSpeedInsights();
 function App() {
 
   return (
@@ -18,6 +17,7 @@ function App() {
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </BrowserRouter>
+      <SpeedInsights />
     </>
   )
 }
