@@ -4,7 +4,6 @@ import { NotFound } from "./pages/NotFound"
 import { Toaster } from "react-hot-toast"
 import LegalNoticePage from "./pages/mentions-legales"
 function App() {
-
   return (
     <>
     <Toaster/>

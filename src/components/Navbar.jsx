@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 
 const navItems = [
   { name: "Accueil", href: "#accueil" },
-  {/*{ name: "À propos", href: "#a-propos" }, { name: "Compétences", href: "#competences" }, { name: "Projets", href: "#projets" },*/},
+  { name: "À propos", href: "#a-propos" },
+  { name: "Formations", href: "#formations"},
+  { name: "Expériences", href: "#experiences" },
+  { name: "Compétences", href: "#competences" },
+  { name: "Projets", href: "#projets" },
   { name: "Contact", href: "#contact" },
 ];
 

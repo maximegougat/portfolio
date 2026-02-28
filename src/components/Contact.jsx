@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { Linkedin, Mail, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import { MessageCircleMoreIcon } from "./ui/message-circle-more";
 
 export const ContactSection = () => {
   const { toast } = useToast();
@@ -58,6 +59,9 @@ export const ContactSection = () => {
       <div className="container mx-auto max-w-3xl flex flex-col items-center space-y-12">
         {/* Titre */}
         <div className="text-center space-y-4">
+          <div className="flex justify-center">
+            <MessageCircleMoreIcon size={50} className="text-primary"/>
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold">
             Contactez-<span className="text-primary">moi</span>
           </h2>
