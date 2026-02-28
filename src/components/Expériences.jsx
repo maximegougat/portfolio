@@ -7,7 +7,7 @@ export const ExperienceSection = () => {
       end: "06/2026",
       company: "",
       website: "https://www.manpower.fr",
-      logo: "/public/icons/Manpower.svg",
+      logo: "/icons/Manpower.svg",
       position: "Conseiller et chargé de recrutement",
       contract:
         "Stage alterné (100 jours en entreprise) de troisième année de BUT GEA (bac +3)",
@@ -29,7 +29,7 @@ export const ExperienceSection = () => {
       end: "aujourd'hui",
       company: "",
       website: "https://www.biss-app.fr",
-      logo: "/public/icons/Biss'App.png",
+      logo: "/icons/Biss'App.png",
       position: "Gérant",
       contract: "",
       tasks: [
@@ -46,7 +46,7 @@ export const ExperienceSection = () => {
       end: "06/2025",
       company: "",
       website: "https://www.maigastudio.com",
-      logo: "/public/icons/Maïga Studio.webp",
+      logo: "/icons/Maïga Studio.webp",
       position: "Assistant de gestion",
       contract: "Stage de deuxième année de BUT GEA (bac +2)",
       tasks: [
@@ -63,7 +63,7 @@ export const ExperienceSection = () => {
       end: "02/2025",
       company: "Servicies",
       website: "https://www.linkedin.com/company/servicies/",
-      logo: "/public/icons/Servicies.svg",
+      logo: "/icons/Servicies.svg",
       position: "Auto-entrepreneur",
       contract: "",
       tasks: [
@@ -75,7 +75,7 @@ export const ExperienceSection = () => {
       end: "07/2024",
       company: "McDonald's",
       website: "https://www.mcdonalds.fr",
-      logo: "/public/icons/McDonald's.svg",
+      logo: "/icons/McDonald's.svg",
       position: "Équipier polyvalent",
       contract: "CDI",
       tasks: [
@@ -91,7 +91,7 @@ export const ExperienceSection = () => {
       start: "01/2024",
       end: "02/2024",
       company: "Crédit Mutuel Enseignant",
-      logo: "/public/icons/Crédit Mutuel Enseignant.png",
+      logo: "/icons/Crédit Mutuel Enseignant.png",
       position: "Agent d'accueil",
       contract: "Stage de première année de BUT GEA (bac +1)",
       tasks: [
