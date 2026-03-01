@@ -106,84 +106,121 @@ export const ExperienceSection = () => {
   ];
 
   return (
-    <section id="experiences" className="py-24 px-4 relative">
-      <div className="container mx-auto max-w-5xl">
-        <div className="flex justify-center">
-          <HistoryIcon size={50} className="text-primary" />
+    <section
+      id="experiences"
+      className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6"
+    >
+      <div className="container mx-auto max-w-6xl">
+        
+        {/* Header */}
+        <div className="text-center mb-14 sm:mb-20">
+          <div className="flex justify-center mb-4">
+            <HistoryIcon
+              size={40}
+              className="text-primary sm:w-[50px] sm:h-[50px]"
+            />
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+            Mes <span className="text-primary">expériences</span>
+          </h2>
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">
-          Mes <span className="text-primary">expériences</span>
-        </h2>
 
+        {/* Timeline */}
         <div className="relative">
-          {/* Barre verticale centrale */}
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 h-full w-[2px] bg-border" />
+          
+          {/* Vertical line (desktop only centered) */}
+          <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 h-full w-[2px] bg-border" />
 
-          <div className="flex flex-col gap-16">
+          {/* Vertical line mobile */}
+          <div className="lg:hidden absolute left-4 top-0 h-full w-[2px] bg-border" />
+
+          <div className="flex flex-col gap-12 sm:gap-16">
             {experiences.map((exp, index) => {
               const isLeft = index % 2 === 0;
 
               return (
                 <div
                   key={index}
-                  className={`relative flex items-start ${
-                    isLeft ? "flex-row-reverse" : ""
-                  }`}
+                  className={`
+                    relative flex flex-col lg:flex-row items-start
+                    ${isLeft ? "lg:flex-row-reverse" : ""}
+                  `}
                 >
+                  {/* Timeline dot */}
+                  <div
+                    className="
+                      absolute
+                      left-4 lg:left-1/2
+                      -translate-x-1/2
+                      w-4 h-4
+                      bg-primary
+                      rounded-full
+                      border-4
+                      border-background
+                    "
+                  />
+
                   {/* Dates */}
                   <div
-                    className={`w-1/2 px-10 text-sm text-muted-foreground ${
-                      isLeft ? "text-left" : "text-right"
-                    }`}
+                    className={`
+                      mb-4 lg:mb-0
+                      pl-12 lg:pl-0
+                      lg:w-1/2
+                      text-sm text-muted-foreground
+                      ${isLeft ? "lg:text-left" : "lg:text-right"}
+                    `}
                   >
                     {exp.start} à {exp.end}
                   </div>
 
-                  {/* Point central */}
-                  <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background" />
-
-                  {/* Carte */}
-                  <div className="w-1/2 px-10">
-                    <div className="bg-card p-6 rounded-lg shadow-xs card-hover flex flex-col items-center text-center">
+                  {/* Card */}
+                  <div className="pl-12 lg:pl-10 lg:w-1/2">
+                    <div className="bg-card p-5 sm:p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300">
+                      
                       {/* Logo */}
                       {exp.logo && (
-                        <a
-                          href={exp.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <img
-                            src={exp.logo}
-                            alt={`${exp.company} logo`}
-                            className="w-16 h-16 object-contain mb-2"
-                          />
-                        </a>
+                        <div className="flex justify-center lg:justify-start mb-3">
+                          <a
+                            href={exp.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <img
+                              src={exp.logo}
+                              alt={`${exp.company} logo`}
+                              className="w-14 h-14 object-contain"
+                            />
+                          </a>
+                        </div>
                       )}
 
-                      {/* Nom de l'entreprise */}
+                      {/* Company */}
                       {exp.company && (
                         <a
                           href={exp.website}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-lg font-semibold mb-2"
+                          className="block text-lg font-semibold mb-1 text-center lg:text-left"
                         >
                           {exp.company}
                         </a>
                       )}
 
-                      {/* Poste */}
-                      <p className="text-sm text-primary font-medium mb-3">
+                      {/* Position */}
+                      <p className="text-sm sm:text-base text-primary font-medium mb-2 text-center lg:text-left">
                         {exp.position}
                       </p>
 
-                      {/* Contrat */}
-                      <p className="text-sm text-muted-foreground mb-3">
-                        {exp.contract}
-                      </p>
+                      {/* Contract */}
+                      {exp.contract && (
+                        <p className="text-sm text-muted-foreground mb-3 text-center lg:text-left">
+                          {exp.contract}
+                        </p>
+                      )}
 
-                      {/* Tâches alignées à gauche */}
-                      <ul className="list-disc list-inside text-sm text-muted-foreground text-left space-y-1 w-full max-w-[18rem]">
+                      {/* Tasks */}
+                      <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1 text-left">
                         {exp.tasks.map((task, i) => (
                           <li key={i}>{task}</li>
                         ))}

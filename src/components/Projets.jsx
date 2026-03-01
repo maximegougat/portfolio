@@ -30,7 +30,8 @@ export const ProjectsSection = () => {
   return (
     <section id="projets" className="py-24 px-4 relative">
       <div className="container mx-auto max-w-5xl">
-        <div className="flex justify-center">
+        {/* Icône et titre */}
+        <div className="flex justify-center mb-4">
           <FolderClockIcon size={50} className="text-primary" />
         </div>
 
@@ -43,15 +44,17 @@ export const ProjectsSection = () => {
           Voici quelques-uns de mes projets récents, réalisés avec passion et détermination.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Grid projets */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => {
             const isInProgress = project.tags.includes("En cours de développement");
 
             return (
               <div
                 key={project.id}
-                className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover"
+                className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover transition-transform hover:scale-105"
               >
+                {/* Image */}
                 <div className="h-48 overflow-hidden">
                   <img
                     src={project.image}
@@ -60,7 +63,9 @@ export const ProjectsSection = () => {
                   />
                 </div>
 
-                <div className="p-6">
+                {/* Contenu */}
+                <div className="p-6 flex flex-col justify-between h-full">
+                  {/* Tags */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map((tag, index) => (
                       <span
@@ -72,20 +77,26 @@ export const ProjectsSection = () => {
                     ))}
                   </div>
 
-                  <h3 className="text-xl font-semibold mb-1">{project.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    {project.description}
-                  </p>
+                  {/* Titre & description */}
+                  <div className="mb-4">
+                    <h3 className="text-xl font-semibold mb-1">{project.title}</h3>
+                    <p className="text-muted-foreground text-sm">
+                      {project.description}
+                    </p>
+                  </div>
 
+                  {/* Lien externe si finalisé */}
                   {!isInProgress && project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex text-foreground/80 hover:text-primary transition-colors duration-300"
-                    >
-                      <ExternalLink size={20} />
-                    </a>
+                    <div className="mt-auto">
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-foreground/80 hover:text-primary transition-colors duration-300 gap-1"
+                      >
+                        Voir le projet <ExternalLink size={16} />
+                      </a>
+                    </div>
                   )}
                 </div>
               </div>

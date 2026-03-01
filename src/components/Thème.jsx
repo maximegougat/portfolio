@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { SunIcon } from "./ui/sun";
 import { MoonIcon } from "./ui/moon";
 import { cn } from "../lib/utils";
 
 export const ThemeToggle = () => {
-  const[isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -14,6 +14,7 @@ export const ThemeToggle = () => {
     } else {
       localStorage.setItem("theme", "light");
       setIsDarkMode(false);
+      document.documentElement.classList.remove("dark");
     }
   }, []);
 
@@ -32,16 +33,17 @@ export const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
+      aria-label="Changer le thème"
       className={cn(
-        "fixed max-sm:hidden top-5 right-5 z-50 p-2 rounded-full transition-colors duration-300",
-        "focus-outlin-hidden"
+        "fixed max-sm:hidden top-5 right-5 z-50 p-2 rounded-full transition-colors duration-300 bg-background/80 hover:bg-background/100",
+        "focus:outline-none"
       )}
     >
       {isDarkMode ? (
-        <SunIcon className="h-6 w-6 text-yellow-300"/> 
+        <SunIcon className="h-6 w-6 text-yellow-300" />
       ) : (
         <MoonIcon className="h-6 w-6 text-blue-900" />
       )}
     </button>
-  )
-}
+  );
+};

@@ -2,30 +2,40 @@ import { ArrowUp } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <footer className="py-8 px-4 bg-card border-t border-border mt-12">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        
-        {/* Gauche : Copyright */}
-        <p className="text-sm text-muted-foreground">
-          &copy; {new Date().getFullYear()} <a href="https://www.linkedin.com/in/maxime-gougat" target="_blank" rel="noopener noreferrer" className="text-primary">Maxime GOUGAT</a>. Tous droits réservés.
+    <footer className="py-8 sm:py-10 px-4 sm:px-6 bg-card border-t border-border mt-16">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+
+        {/* Copyright */}
+        <p className="text-xs sm:text-sm text-muted-foreground text-center sm:text-left">
+          &copy; {new Date().getFullYear()}{" "}
+          <a
+            href="https://www.linkedin.com/in/maxime-gougat"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:opacity-80 transition"
+          >
+            Maxime GOUGAT
+          </a>
+          . Tous droits réservés.
         </p>
 
-        {/* Centre : bouton retour en haut */}
+        {/* Back to top */}
         <a
           href="#accueil"
-          className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-colors"
+          className="order-first sm:order-none p-2 sm:p-3 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-all duration-300 hover:scale-105"
           aria-label="Retour en haut"
         >
-          <ArrowUp size={20} />
+          <ArrowUp className="h-4 w-4 sm:h-5 sm:w-5" />
         </a>
 
-        {/* Droite : Mentions légales */}
+        {/* Legal */}
         <a
           href="/mentions-legales"
-          className="text-sm text-muted-foreground hover:text-primary transition-colors underline-offset-4"
+          className="text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors underline-offset-4 hover:underline text-center sm:text-right"
         >
           Mentions légales
         </a>
+
       </div>
     </footer>
   );
