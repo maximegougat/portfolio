@@ -2,7 +2,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { RocketIcon } from "./ui/rocket";
 
-// Liste des formations / certifications / diplômes / MOOC
+// Liste des formations
 const formations = [
   { 
     name: "Premiers Secours Citoyen (PSC)",
@@ -129,36 +129,26 @@ export const FormationsSection = () => {
     .sort((a, b) => getSortableDate(b.date) - getSortableDate(a.date));
 
   return (
-    <section
-      id="formations"
-      className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-secondary/30"
-    >
-      <div className="container mx-auto max-w-6xl">
-
-        {/* Header */}
-        <div className="text-center mb-10 sm:mb-14">
-          <div className="flex justify-center mb-4">
-            <RocketIcon
-              size={40}
-              className="text-primary sm:w-[50px] sm:h-[50px]"
-            />
-          </div>
-
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-            Mes <span className="text-primary">formations</span>
-          </h2>
+    <section id="formations" className="py-24 px-4 relative bg-secondary/30">
+      <div className="container mx-auto max-w-5xl">
+        <div className="flex justify-center mb-4">
+          <RocketIcon size={50} className="text-primary" />
         </div>
 
-        {/* Filtres (scroll mobile) */}
-        <div className="flex gap-3 overflow-x-auto pb-4 sm:justify-center sm:flex-wrap mb-10 scrollbar-hide">
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          Mes <span className="text-primary">formations</span>
+        </h2>
+
+        {/* Filtres */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
               className={cn(
-                "whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-sm sm:text-base transition-all duration-300 shrink-0",
+                "px-5 py-2 rounded-full transition-colors duration-300",
                 activeCategory === category
-                  ? "bg-primary text-primary-foreground shadow-md"
+                  ? "bg-primary text-primary-foreground"
                   : "bg-secondary/70 text-foreground hover:bg-secondary"
               )}
             >
@@ -167,53 +157,49 @@ export const FormationsSection = () => {
           ))}
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+        {/* Cartes */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredFormations.map((formation, key) => (
             <div
               key={key}
-              className="group bg-card rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col p-6"
+              className="bg-card rounded-lg shadow-xs flex flex-col card-hover transition-transform hover:scale-105"
             >
-              {/* Logo */}
-              {formation.logo && (
-                <div className="flex justify-center mb-4">
-                  <a
-                    href={formation.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+              {/* HEADER */}
+              <div className="h-16 flex items-center justify-center border-b">
+                {formation.logo && (
+                  <a href={formation.website} target="_blank" rel="noopener noreferrer">
                     <img
                       src={formation.logo}
                       alt={formation.organization}
-                      className="w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-110"
+                      className="w-12 h-12 object-contain"
                     />
                   </a>
-                </div>
-              )}
-
-              {/* Titre */}
-              <div className="text-center mb-3">
-                <h3 className="font-semibold text-sm sm:text-base leading-snug line-clamp-4">
-                  {formation.name}
-                </h3>
-                <p className="text-xs text-muted-foreground mt-1">
-                  {formation.organization}
-                </p>
+                )}
               </div>
 
-              {/* Date */}
-              <div className="text-center text-xs sm:text-sm text-muted-foreground mb-4">
+              {/* TITLE */}
+              <div className="h-[120px] flex flex-col justify-center items-center text-center px-4">
+                <span className="font-semibold leading-snug line-clamp-4">
+                  {formation.name}
+                </span>
+                <span className="text-xs text-muted-foreground mt-1">
+                  {formation.organization}
+                </span>
+              </div>
+
+              {/* META */}
+              <div className="h-10 flex items-center justify-center text-sm text-muted-foreground">
                 {formation.date}
               </div>
 
-              {/* Footer */}
-              <div className="mt-auto flex flex-col items-center gap-2">
+              {/* ACTIONS / COMMENT */}
+              <div className="h-16 flex flex-col items-center justify-center gap-2 px-4 pb-3">
                 {formation.presentationLink && (
                   <a
                     href={formation.presentationLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs sm:text-sm text-primary hover:underline"
+                    className="text-xs text-primary hover:underline"
                   >
                     Présentation
                   </a>

@@ -41,14 +41,13 @@ export const Navbar = () => {
   return (
     <nav
       className={cn(
-        "fixed w-full z-50 transition-all duration-300",
+        "fixed w-full z-40 transition-all duration-300",
         isScrolled
           ? "py-3 bg-background/80 backdrop-blur-md shadow-md"
           : "py-5"
       )}
     >
-      <div className="container mx-auto flex items-center justify-between px-4 sm:px-6">
-        {/* Logo / Nom */}
+      <div className="container flex items-center justify-between">
         <a
           href="#accueil"
           className="text-lg sm:text-xl font-bold text-foreground"
@@ -56,7 +55,7 @@ export const Navbar = () => {
           Portfolio de <span className="text-primary">Maxime GOUGAT</span>
         </a>
 
-        {/* Desktop nav */}
+        {/* Desktop */}
         <div className="hidden md:flex space-x-8">
           {navItems.map((item) => (
             <a
@@ -69,7 +68,7 @@ export const Navbar = () => {
           ))}
         </div>
 
-        {/* Mobile menu button */}
+        {/* Mobile button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="md:hidden p-2 z-50"
@@ -78,7 +77,7 @@ export const Navbar = () => {
           {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
         </button>
 
-        {/* Mobile menu overlay */}
+        {/* Mobile menu */}
         <div
           className={cn(
             "fixed inset-0 bg-background/95 backdrop-blur-md flex flex-col items-center justify-center transition-opacity duration-300 md:hidden",

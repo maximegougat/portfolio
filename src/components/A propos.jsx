@@ -1,109 +1,91 @@
-import { ChartSplineIcon, HomeIcon, ShieldCheckIcon } from "lucide-react"
+import { Briefcase, ChartSplineIcon, Code, HomeIcon, ShieldCheckIcon, User } from "lucide-react"
+import { KeyCircleIcon } from "./ui/key-circle"
+import { CircleHelpIcon } from "./ui/circle-help"
 import { IdCardIcon } from "./ui/id-card"
 
 export const AboutSection = () => {
   return (
-    <section
-      id="a-propos"
-      className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 relative"
-    >
-      <div className="container mx-auto max-w-6xl">
-        
-        {/* Header */}
-        <div className="flex flex-col items-center text-center mb-12">
-          <IdCardIcon
-            size={40}
-            className="text-primary mb-4 sm:mb-6 sm:w-[50px] sm:h-[50px]"
-          />
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-            À propos de <span className="text-primary">moi</span>
-          </h2>
+    <section id="a-propos" className="py-24 px-4 relative">
+      {" "}
+      <div className="container mx-auto max-w-5xl">
+        <div className="flex justify-center">
+          <IdCardIcon size={50} className="text-primary"/>
         </div>
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          À propos de <span className="text-primary">moi</span>
+        </h2>
 
-        {/* Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          
-          {/* Left column */}
-          <div className="space-y-6 text-center lg:text-left">
-            <h3 className="text-xl sm:text-2xl font-semibold">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6">
+            <h3 className="text-2xl font-semibold">
               Passionné par l'immobilier et la bourse
             </h3>
-
-            <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
-              Investir intelligemment, c'est comprendre comment votre argent
-              peut travailler pour vous sur le long terme.
-              <br /><br />
-              Dans <span className="text-primary font-bold">l'immobilier</span>, 
-              les intérêts composés se manifestent par la valeur qui s'accumule
-              sur vos biens au fil du temps. Chaque loyer perçu peut être
-              réinvesti pour acquérir un nouveau bien ou améliorer un bien
-              existant.
-              <br /><br />
-              En <span className="text-primary font-bold">bourse</span>, 
-              le principe est similaire : les gains réalisés peuvent être
-              réinvestis pour générer une croissance exponentielle du capital.
-              <br /><br />
-              Comprendre et appliquer les intérêts composés vous permet
-              de maximiser vos chances d’atteindre vos objectifs financiers.
+            <p className="text-muted-foreground text-lg">
+              Investir intelligemment, c'est comprendre comment votre argent peut travailler pour vous sur le long terme.
+              <br/><br/>
+              Dans <span className="text-primary font-bold">l'immobilier</span>, les intérêts composés se manifestent par la valeur qui s'accumule sur vos biens au fil du temps.<br/>Chaque loyer perçu peut être réinvesti pour acquérir un nouveau bien ou améliorer un bien existant, ce qui augmente progressivement votre patrimoine. Même de petites sommes réinvesties régulièrement peuvent, sur plusieurs années, produire un effet boule de neige impressionnant.
+              <br/><br/>
+              En <span className="text-primary font-bold">bourse</span>, le principe est similaire : les gains que vous réalisez peuvent être réinvestis pour générer encore plus de gains. Avec le temps, cette réinjection continue de vos profits peut produire une croissance exponentielle de votre capital, même avec des investissements modestes au départ.
+              <br/><br/>
+              Comprendre et appliquer les intérêts composés dans ces deux domaines vous permet de faire travailler votre argent efficacement et de maximiser vos chances d'atteindre vos objectifs financiers sur le long terme.
             </p>
-          </div>
 
-          {/* Right column */}
-          <div className="grid gap-6">
-            
-            {/* Card 1 */}
-            <div className="gradient-border p-5 sm:p-6 rounded-2xl card-hover">
-              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
-                <div className="p-3 rounded-full bg-primary/10 shrink-0">
-                  <HomeIcon className="h-7 w-7 sm:h-8 sm:w-8 text-primary" />
+            <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center hidden">
+              <a href="" className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300">
+                Télécharger le simulateur d'intérêts composés
+              </a>
+
+              <a href="#contact" className="cosmic-button hidden">
+                ME CONTACTER
+              </a>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 gap-6">
+            <div className="gradient-border p-6 card-hover">
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-full bg-primary/10">
+                  <HomeIcon className="h-8 w-8 text-primary"/>
                 </div>
-                <div>
-                  <h4 className="font-semibold text-lg mb-2">
+                <div className="text-left">
+                  <h4 className="font-semibold text-lg">
                     Immobilier
                   </h4>
-                  <p className="text-sm sm:text-base text-muted-foreground">
-                    Intérêt pour le crowdfunding, les SCPI et la structuration
-                    de projets immobiliers via des holdings.
+                  <p className="text-muted-foreground">
+                    Je m'intéresse à divers invetissements en immobilier tels que le crowdfunding/crowdlending, les <a href="https://www.economie.gouv.fr/particuliers/investir-dans-limmobilier/scpi-investissez-dans-limmobilier-avec-un-placement#:~:text=La%20SCPI%2C%20appel%C3%A9e%20%C3%A9galement%20%C2%AB%20pierre,immobilier%20destin%C3%A9%20%C3%A0%20la%20location." target="_blank" rel="noopener noreferrer">SCPI</a>, et la structuration de projets de détention de biens immobiliers via des holdings.
                   </p>
                 </div>
               </div>
             </div>
-
-            {/* Card 2 */}
-            <div className="gradient-border p-5 sm:p-6 rounded-2xl card-hover">
-              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
-                <div className="p-3 rounded-full bg-primary/10 shrink-0">
-                  <ChartSplineIcon className="h-7 w-7 sm:h-8 sm:w-8 text-primary" />
+            <div className="gradient-border p-6 card-hover">
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-full bg-primary/10">
+                  <ChartSplineIcon className="h-8 w-8 text-primary"/>
                 </div>
-                <div>
-                  <h4 className="font-semibold text-lg mb-2">
+                <div className="text-left">
+                  <h4 className="font-semibold text-lg">
                     Bourse
                   </h4>
-                  <p className="text-sm sm:text-base text-muted-foreground">
-                    Mise en place d'une stratégie long terme sur un ETF MSCI World.
+                  <p className="text-muted-foreground">
+                    J'établis actuellement une stratégie avant de rentrer en bourse (sur un MSCI World) sur du long terme.
                   </p>
                 </div>
               </div>
             </div>
-
-            {/* Card 3 */}
-            <div className="gradient-border p-5 sm:p-6 rounded-2xl card-hover">
-              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
-                <div className="p-3 rounded-full bg-primary/10 shrink-0">
-                  <ShieldCheckIcon className="h-7 w-7 sm:h-8 sm:w-8 text-primary" />
+            <div className="gradient-border p-6 card-hover">
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-full bg-primary/10">
+                  <ShieldCheckIcon className="h-8 w-8 text-primary"/>
                 </div>
-                <div>
-                  <h4 className="font-semibold text-lg mb-2">
+                <div className="text-left">
+                  <h4 className="font-semibold text-lg">
                     Certification AMF
                   </h4>
-                  <p className="text-sm sm:text-base text-muted-foreground">
-                    Préparation à la certification AMF pour approfondir
-                    mes connaissances en finance et réglementation.
+                  <p className="text-muted-foreground">
+                    Je me prépare actuellement à passer la certification AMF pour approfondir mes connaissances en finance et en réglementation des marchés financiers.
                   </p>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
