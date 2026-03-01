@@ -10,8 +10,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />}/>
-          <Route path="/mentions-legales" element={<LegalNoticePage />} />
-          <Route path="*" element={<NotFound/>} />
+          <Route path="/mentions-legales" element={<LegalNoticePage/>} />
         </Routes>
       </BrowserRouter>
     </>
