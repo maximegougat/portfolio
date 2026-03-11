@@ -30,6 +30,7 @@ const formations = [
     logo: "/icons/ETS.svg",
     website: "https://www.etsglobal.org",
     presentationLink: "https://www.etsglobal.org/fr/en/test-type-family/toeic-listening-and-reading-test",
+    comment: "Score obtenu : 705/990"
   },
   { 
     name: "Score IAE Message",
