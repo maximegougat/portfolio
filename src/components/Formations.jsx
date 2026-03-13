@@ -98,7 +98,7 @@ const formations = [
     logo: "/icons/Banco de Portugal.png",
     website: "https://www.bportugal.pt/",
     presentationLink: "https://elearning.bportugal.pt/?lang=fr",
-  }
+  },
   {
     name: "L'atelier RGPD",
     category: "E-learning",
