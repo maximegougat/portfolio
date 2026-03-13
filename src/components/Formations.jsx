@@ -83,7 +83,7 @@ const formations = [
   },
   {
     name: "SecNumacadémie",
-    category: "MOOC",
+    category: "E-learning",
     date: "02/2026",
     organization: "ANSSI",
     logo: "/icons/ANSSI.svg",
@@ -92,16 +92,25 @@ const formations = [
   },
   {
     name: "Connaissance des billets de banque en euros",
-    category: "MOOC",
+    category: "E-learning",
     date: "08/2025",
     organization: "Banco de Portugal",
     logo: "/icons/Banco de Portugal.png",
     website: "https://www.bportugal.pt/",
     presentationLink: "https://elearning.bportugal.pt/?lang=fr",
   }
+  {
+    name: "L'atelier RGPD",
+    category: "E-learning",
+    date: "08/2025",
+    organization: "CNIL",
+    logo: "/icons/CNIL.jpg",
+    website: "https://www.cnil.fr/",
+    presentationLink: "https://atelier-rgpd.cnil.fr/",
+  }
 ];
 
-const categories = ["Toutes", "Diplômes", "Certifications", "Formations", "MOOC"];
+const categories = ["Toutes", "Diplômes", "Certifications", "Formations", "E-learning"];
 
 // Helper pour trier les dates (on prend la date de fin si elle existe)
 const getSortableDate = (date) => {
