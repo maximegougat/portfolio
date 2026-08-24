@@ -10,7 +10,7 @@ export const ExperienceSection = () => {
       logo: "/icons/Manpower.svg",
       position: "Conseiller et chargé de recrutement",
       contract:
-        "Stage alterné (100 jours en entreprise) de troisième année de BUT GEA (bac +3)",
+        "Stage alterné (100 jours en entreprise) de troisième année de BUT GEA (bac + 3)",
       tasks: [
         "Promotion du Compte Épargne Temps rémunéré à 8% par an",
         "Accueil et aide aux candidats et intérimaires",
@@ -29,7 +29,7 @@ export const ExperienceSection = () => {
       end: "aujourd'hui",
       company: "",
       website: "https://www.biss-app.fr",
-      logo: "/icons/Biss'App.png",
+      logo: "/icons/Biss'App.svg",
       position: "Gérant",
       contract: "",
       tasks: [
@@ -48,7 +48,7 @@ export const ExperienceSection = () => {
       website: "https://www.maigastudio.com",
       logo: "/icons/Maïga Studio.webp",
       position: "Assistant de gestion",
-      contract: "Stage de deuxième année de BUT GEA (bac +2)",
+      contract: "Stage de deuxième année de BUT GEA (bac + 2)",
       tasks: [
         "Mise en place de documents administratifs comptables",
         "Gestion à la mise en place du 1er centre de formation pour cheveux multi-textures à Clermont-Ferrand (Maïga Universal School)",
@@ -93,7 +93,7 @@ export const ExperienceSection = () => {
       company: "Crédit Mutuel Enseignant",
       logo: "/icons/Crédit Mutuel Enseignant.png",
       position: "Agent d'accueil",
-      contract: "Stage de première année de BUT GEA (bac +1)",
+      contract: "Stage de première année de BUT GEA (bac + 1)",
       tasks: [
         "Accueil et aide à la clientèle",
         "Réponse aux appels téléphoniques",

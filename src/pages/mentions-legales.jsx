@@ -13,8 +13,7 @@ const LegalNoticePage = () => {
             1. ÉDITEUR DU SITE
           </h2>
           <p>
-            Conformément aux dispositions des articles 6-III et 19 de la Loi n°2004-575 du 21 juin 2004 pour la Confiance dans l&rsquo;Économie Numérique (LCEN),
-            il est précisé aux utilisateurs du présent site l&rsquo;identité des différents intervenants dans le cadre de sa réalisation et de son suivi :
+              Conformément aux dispositions des articles 6-III et 19 de la Loi n°2004-575 du 21 juin 2004 pour la Confiance dans l&rsquo;Économie Numérique (LCEN), il est précisé aux utilisateurs du présent site l&rsquo;identité des différents intervenants dans le cadre de sa réalisation et de son suivi :
           </p>
           <ul className="list-disc list-inside mt-3 space-y-1">
             <li>Nom et prénom : <a href="https://linkedin/in/maxime-gougat" target="_blank" rel="noopener noreferrer">Maxime GOUGAT</a></li>
@@ -46,12 +45,10 @@ const LegalNoticePage = () => {
             3. PROPRIÉTÉ INTELLECTUELLE
           </h2>
           <p>
-            L&rsquo;ensemble des contenus présents sur ce site (textes, images, graphismes, logos, vidéos, structure du site, etc.)
-            est protégé par le droit de la propriété intellectuelle.
+            L&rsquo;ensemble des contenus présents sur ce site (textes, images, graphismes, logos, vidéos, structure du site, etc.) est protégé par le droit de la propriété intellectuelle.
           </p>
           <p className="mt-2">
-            Toute reproduction, représentation, adaptation ou exploitation, totale ou partielle, sans autorisation écrite préalable
-            est strictement interdite.
+            Toute reproduction, représentation, adaptation ou exploitation, totale ou partielle, sans autorisation écrite préalable est strictement interdite.
           </p>
         </section>
 
@@ -89,7 +86,7 @@ const LegalNoticePage = () => {
         </section>
 
         <p className="text-sm text-muted-foreground text-center mt-8">
-          Dernière mise à jour : {new Date().toLocaleDateString('fr-FR')}
+          Dernière mise à jour : 25/08/2026
         </p>
       </article>
     </main>

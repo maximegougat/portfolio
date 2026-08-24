@@ -80,6 +80,16 @@ const formations = [
     logo: "/icons/IUT UCA.png",
     website: "https://iut.uca.fr/",
     presentationLink: "https://iut.uca.fr/formations/but-gestion-des-entreprises-des-administrations-clermont",
+    comment: "Diplômé (bac + 3)"
+  },
+  { 
+    name: "Master Management Stratégique (parcours POMD)",
+    category: "Diplômes",
+    date: "09/2026 - 09/2028",
+    organization: "IAE Clermont Auvergne",
+    logo: "/icons/IAE Clermont Auvergne.png",
+    website: "https://iae.uca.fr/",
+    presentationLink: "https://iae.uca.fr/formation/master/master-management-strategique",
   },
   {
     name: "SecNumacadémie",
