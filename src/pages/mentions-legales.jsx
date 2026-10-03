@@ -23,9 +23,9 @@ const LegalNoticePage = () => {
               Conformément aux dispositions des articles 6-III et 19 de la Loi n°2004-575 du 21 juin 2004 pour la Confiance dans l&rsquo;Économie Numérique (LCEN), il est précisé aux utilisateurs du présent site l&rsquo;identité des différents intervenants dans le cadre de sa réalisation et de son suivi :
           </p>
           <ul className="list-disc list-inside mt-3 space-y-1">
-            <li>Nom et prénom : <a href="https://linkedin/in/maxime-gougat" target="_blank" rel="noopener noreferrer">Maxime GOUGAT</a></li>
+            <li>Nom et prénom : <a href="https://linkedin.com/in/maxime-gougat" target="_blank" rel="noopener noreferrer">Maxime GOUGAT</a></li>
             <li>Adresse e-mail : <a href="mailto:contact@maximegougat.com" className="text-primary underline">contact@maximegougat.com</a></li>
-            <li>Directeur de la publication : <a href="https://linkedin/in/maxime-gougat" target="_blank" rel="noopener noreferrer">Maxime GOUGAT</a></li>
+            <li>Directeur de la publication : <a href="https://linkedin.com/in/maxime-gougat" target="_blank" rel="noopener noreferrer">Maxime GOUGAT</a></li>
           </ul>
           <p className="mt-3">
             Conformément à l&rsquo;article 6-III-2 de la LCEN, l&rsquo;éditeur a choisi de ne pas faire apparaître son adresse personnelle.
