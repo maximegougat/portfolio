@@ -1,4 +1,4 @@
-import { StarBackground } from "../components/StarBackground"
+import { Background } from "../components/Background"
 import { Navbar } from "../components/Navbar"
 import { HeroSection } from "../components/Accueil"
 import { AboutSection } from "../components/A propos"
@@ -13,7 +13,7 @@ export const Home = () => {
   return (
     <div className="relative min-h-screen bg-background text-foreground overflow-x-clip">
       {/* Background effects */}
-      <StarBackground />
+      <Background />
       {/* Navbar (inclut le bouton de thème) */}
       <Navbar/>
       {/* Main content */}

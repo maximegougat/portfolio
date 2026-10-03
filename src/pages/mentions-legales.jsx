@@ -1,9 +1,12 @@
 import React from 'react'
 import { ArrowLeft } from 'lucide-react'
+import { Background } from '@/components/Background'
 
 const LegalNoticePage = () => {
   return (
-    <main className="min-h-screen px-4 py-10 sm:py-16 text-left">
+    <>
+    <Background />
+    <main className="relative z-10 min-h-screen px-4 py-10 sm:py-16 text-left">
       <a href="/" className="mx-auto mb-6 flex max-w-4xl items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
         <ArrowLeft className="h-4 w-4" /> Portfolio de Maxime GOUGAT
       </a>
@@ -94,6 +97,7 @@ const LegalNoticePage = () => {
         </p>
       </article>
     </main>
+    </>
   )
 }
 
