@@ -16,23 +16,24 @@ export const StarBackground = () => {
     }
 
     window.addEventListener("resize", handleResize);
-    
+
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const generateStars = () => {
-    const numberOfStars = Math.floor(
-      (window.innerWidth * window.innerHeight) / 10000
+    const numberOfStars = Math.min(
+      Math.floor((window.innerWidth * window.innerHeight) / 10000),
+      220
     );
     const newStars = [];
 
     for (let i = 0; i < numberOfStars; i++) {
       newStars.push({
         id:i,
-        size: Math.random() * 3 + 1 ,
+        size: Math.random() * 2.5 + 0.5 ,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        opacity: Math.random() * 0.5 + 0.5,
+        opacity: Math.random() * 0.5 + 0.4,
         animationDuration: Math.random() * 4 + 2,
       })
     };
@@ -59,36 +60,45 @@ export const StarBackground = () => {
 
 
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-      {stars.map((star) => (
-        <div
-          key={star.id}
-          className="star animate-pulse-subtle" style={{
-            width: star.size + "px",
-            height: star.size + "px",
-            left: star.x + "%",
-            top: star.y + "%",
-            opacity: star.opacity,
-            animationDuration: star.animationDuration + "s",
-          }}
-        />
-      ))}
+    <div aria-hidden="true" className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      {/* Halos colorés (clair et sombre) */}
+      <div className="absolute -top-[20%] -left-[10%] h-[70vmax] w-[70vmax] rounded-full bg-[radial-gradient(circle,hsl(var(--primary)/0.16),transparent_60%)] dark:bg-[radial-gradient(circle,hsl(var(--primary)/0.14),transparent_60%)]" />
+      <div className="absolute -bottom-[25%] -right-[15%] h-[70vmax] w-[70vmax] rounded-full bg-[radial-gradient(circle,hsl(var(--accent)/0.14),transparent_60%)] dark:bg-[radial-gradient(circle,hsl(var(--accent)/0.12),transparent_60%)]" />
 
+      {/* Grille discrète en thème clair */}
+      <div className="absolute inset-0 dark:hidden opacity-[0.5] bg-[linear-gradient(hsl(var(--border))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border))_1px,transparent_1px)] bg-size-[56px_56px] mask-[radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
 
-      {meteors.map((meteor) => (
-        <div
-          key={meteor.id}
-          className="meteor animate-meteor"
-          style={{
-            width: meteor.size * 50 + "px",
-            height: meteor.size * 2 + "px",
-            left: meteor.x + "%",
-            top: meteor.y + "%",
-            delay: meteor.delay,
-            animationDuration: meteor.animationDuration + "s",
-          }}
-        />
-      ))}
+      {/* Étoiles et météores en thème sombre */}
+      <div className="hidden dark:block">
+        {stars.map((star) => (
+          <div
+            key={star.id}
+            className="star animate-pulse-subtle" style={{
+              width: star.size + "px",
+              height: star.size + "px",
+              left: star.x + "%",
+              top: star.y + "%",
+              opacity: star.opacity,
+              animationDuration: star.animationDuration + "s",
+            }}
+          />
+        ))}
+
+        {meteors.map((meteor) => (
+          <div
+            key={meteor.id}
+            className="meteor animate-meteor"
+            style={{
+              width: meteor.size * 50 + "px",
+              height: meteor.size * 2 + "px",
+              left: meteor.x + "%",
+              top: meteor.y + "%",
+              animationDelay: meteor.delay + "s",
+              animationDuration: meteor.animationDuration + "s",
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
 };

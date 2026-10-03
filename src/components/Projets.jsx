@@ -1,5 +1,7 @@
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { FolderClockIcon } from "./ui/folder-clock";
+import { SectionHeading } from "./ui/section-heading";
+import { Reveal } from "./ui/reveal";
 
 const projects = [
   {
@@ -28,67 +30,67 @@ const projects = [
 
 export const ProjectsSection = () => {
   return (
-    <section id="projets" className="py-24 px-4 relative">
-      <div className="container mx-auto max-w-5xl">
-        <div className="flex justify-center">
-          <FolderClockIcon size={50} className="text-primary" />
-        </div>
-
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
+    <section id="projets" className="py-20 md:py-28 px-4 relative">
+      <div className="container mx-auto max-w-6xl">
+        <SectionHeading
+          icon={FolderClockIcon}
+          subtitle="Voici quelques-uns de mes projets récents, réalisés avec passion et détermination."
+        >
           Mes principaux
-          <span className="text-primary"> projets</span>
-        </h2>
+          <span className="text-gradient"> projets</span>
+        </SectionHeading>
 
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Voici quelques-uns de mes projets récents, réalisés avec passion et détermination.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {projects.map((project, index) => {
             const isInProgress = project.tags.includes("En cours de développement");
 
             return (
-              <div
-                key={project.id}
-                className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover"
-              >
-                <div className="h-48 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                </div>
+              <Reveal key={project.id} delay={index * 0.1} className="h-full">
+                <div className="group surface card-hover h-full overflow-hidden flex flex-col text-left">
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/50 via-black/0 to-transparent" />
 
-                <div className="p-6">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="px-2 py-1 text-xs font-medium border rounded-full bg-secondary text-secondary-foreground"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                    <div className="absolute left-4 top-4 flex flex-wrap gap-2">
+                      {project.tags.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-black/55 text-white backdrop-blur-md ring-1 ring-white/15"
+                        >
+                          <span className={`h-1.5 w-1.5 rounded-full ${isInProgress ? "bg-amber-400 animate-pulse" : "bg-emerald-400"}`} />
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
-                  <h3 className="text-xl font-semibold mb-1">{project.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    {project.description}
-                  </p>
+                  <div className="p-5 sm:p-6 flex flex-1 items-end justify-between gap-4">
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-semibold mb-1">{project.title}</h3>
+                      <p className="text-muted-foreground text-sm">
+                        {project.description}
+                      </p>
+                    </div>
 
-                  {!isInProgress && project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex text-foreground/80 hover:text-primary transition-colors duration-300"
-                    >
-                      <ExternalLink size={20} />
-                    </a>
-                  )}
+                    {!isInProgress && project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Visiter ${project.title}`}
+                        className="icon-tile rounded-full h-11 w-11 shrink-0 transition-all duration-300 hover:scale-110 hover:text-white hover:bg-none hover:bg-primary"
+                      >
+                        <ExternalLink size={18} />
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
+              </Reveal>
             );
           })}
         </div>

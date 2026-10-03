@@ -1,46 +1,39 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { SunIcon } from "./ui/sun";
 import { MoonIcon } from "./ui/moon";
 import { cn } from "../lib/utils";
 
-export const ThemeToggle = () => {
-  const[isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "dark") {
-      setIsDarkMode(true);
-      document.documentElement.classList.add("dark");
-    } else {
-      localStorage.setItem("theme", "light");
-      setIsDarkMode(false);
-    }
-  }, []);
+export const ThemeToggle = ({ className }) => {
+  // Le thème initial est appliqué par le script de index.html
+  const [isDarkMode, setIsDarkMode] = useState(
+    () => document.documentElement.classList.contains("dark")
+  );
 
   const toggleTheme = () => {
-    if (isDarkMode) {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-      setIsDarkMode(false);
-    } else {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-      setIsDarkMode(true);
+    const next = !isDarkMode;
+    document.documentElement.classList.toggle("dark", next);
+    try {
+      localStorage.setItem("theme", next ? "dark" : "light");
+    } catch {
+      // stockage indisponible (navigation privée…)
     }
+    setIsDarkMode(next);
   };
 
   return (
     <button
+      type="button"
       onClick={toggleTheme}
+      aria-label={isDarkMode ? "Activer le thème clair" : "Activer le thème sombre"}
       className={cn(
-        "fixed max-sm:hidden top-5 right-5 z-50 p-2 rounded-full transition-colors duration-300",
-        "focus-outlin-hidden"
+        "flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card/70 backdrop-blur transition-colors duration-300 hover:border-primary/50",
+        className
       )}
     >
       {isDarkMode ? (
-        <SunIcon className="h-6 w-6 text-yellow-300"/> 
+        <SunIcon size={20} className="text-yellow-300"/>
       ) : (
-        <MoonIcon className="h-6 w-6 text-blue-900" />
+        <MoonIcon size={20} className="text-blue-900" />
       )}
     </button>
   )

@@ -1,4 +1,7 @@
+import { CalendarDays } from "lucide-react";
 import { HistoryIcon } from "./ui/history";
+import { SectionHeading } from "./ui/section-heading";
+import { Reveal } from "./ui/reveal";
 
 export const ExperienceSection = () => {
   const experiences = [
@@ -98,7 +101,6 @@ export const ExperienceSection = () => {
         "Accueil et aide à la clientèle",
         "Réponse aux appels téléphoniques",
         "Envois postaux de cartes bancaires, chéquiers, …",
-        "Service à table",
         "Envoi de mails et SMS aux clients",
         "Traitement des dépôts de chèques",
       ],
@@ -106,90 +108,104 @@ export const ExperienceSection = () => {
   ];
 
   return (
-    <section id="experiences" className="py-24 px-4 relative">
-      <div className="container mx-auto max-w-5xl">
-        <div className="flex justify-center">
-          <HistoryIcon size={50} className="text-primary" />
-        </div>
-        <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">
-          Mes <span className="text-primary">expériences</span>
-        </h2>
+    <section id="experiences" className="py-20 md:py-28 px-4 relative">
+      <div className="container mx-auto max-w-6xl">
+        <SectionHeading icon={HistoryIcon}>
+          Mes <span className="text-gradient">expériences</span>
+        </SectionHeading>
 
         <div className="relative">
-          {/* Barre verticale centrale */}
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 h-full w-[2px] bg-border" />
+          {/* Barre verticale (à gauche sur mobile, centrée sur desktop) */}
+          <div className="absolute left-[11px] md:left-1/2 md:-translate-x-1/2 top-2 bottom-2 w-[2px] bg-linear-to-b from-primary/60 via-border to-accent/50" />
 
-          <div className="flex flex-col gap-16">
+          <div className="flex flex-col gap-10 md:gap-14">
             {experiences.map((exp, index) => {
               const isLeft = index % 2 === 0;
 
               return (
                 <div
                   key={index}
-                  className={`relative flex items-start ${
-                    isLeft ? "flex-row-reverse" : ""
-                  }`}
+                  className="relative pl-10 md:pl-0 md:grid md:grid-cols-2 md:gap-16"
                 >
-                  {/* Dates */}
-                  <div
-                    className={`w-1/2 px-10 text-sm text-muted-foreground ${
-                      isLeft ? "text-left" : "text-right"
-                    }`}
-                  >
-                    {exp.start} à {exp.end}
+                  {/* Point */}
+                  <div className="absolute left-[12px] md:left-1/2 -translate-x-1/2 top-2.5 md:top-[1.85rem] flex h-5 w-5 items-center justify-center rounded-full bg-background ring-2 ring-primary">
+                    <span className="h-2 w-2 rounded-full bg-primary" />
                   </div>
 
-                  {/* Point central */}
-                  <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background" />
+                  {/* Dates */}
+                  <Reveal
+                    className={`mb-3 md:mb-0 md:pt-6 md:row-start-1 ${
+                      isLeft ? "md:col-start-2 md:text-left" : "md:col-start-1 md:text-right"
+                    }`}
+                  >
+                    <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 backdrop-blur px-3.5 py-1.5 text-sm font-medium text-muted-foreground">
+                      <CalendarDays className="h-4 w-4 text-primary" />
+                      {exp.start} à {exp.end}
+                    </span>
+                  </Reveal>
 
                   {/* Carte */}
-                  <div className="w-1/2 px-10">
-                    <div className="bg-card p-6 rounded-lg shadow-xs card-hover flex flex-col items-center text-center">
-                      {/* Logo */}
-                      {exp.logo && (
-                        <a
-                          href={exp.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <img
-                            src={exp.logo}
-                            alt={`${exp.company} logo`}
-                            className="w-16 h-16 object-contain mb-2"
-                          />
-                        </a>
-                      )}
+                  <Reveal
+                    delay={0.08}
+                    className={`md:row-start-1 ${isLeft ? "md:col-start-1" : "md:col-start-2"}`}
+                  >
+                    <div className="surface card-hover p-5 sm:p-6 text-left">
+                      <div className="flex items-center gap-4 mb-4">
+                        {/* Logo */}
+                        {exp.logo && (
+                          <a
+                            href={exp.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-white p-2 ring-1 ring-border"
+                          >
+                            <img
+                              src={exp.logo}
+                              alt={`${exp.company} logo`}
+                              loading="lazy"
+                              className="max-h-full max-w-full object-contain"
+                            />
+                          </a>
+                        )}
 
-                      {/* Nom de l'entreprise */}
-                      {exp.company && (
-                        <a
-                          href={exp.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-lg font-semibold mb-2"
-                        >
-                          {exp.company}
-                        </a>
-                      )}
+                        <div className="min-w-0">
+                          {/* Nom de l'entreprise */}
+                          {exp.company && (
+                            <a
+                              href={exp.website}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block font-display text-lg font-semibold hover:text-primary transition-colors"
+                            >
+                              {exp.company}
+                            </a>
+                          )}
 
-                      {/* Poste */}
-                      <p className="text-sm text-primary font-medium mb-3">
-                        {exp.position}
-                      </p>
+                          {/* Poste */}
+                          <p className="font-display text-base sm:text-lg text-primary font-semibold leading-snug">
+                            {exp.position}
+                          </p>
+                        </div>
+                      </div>
 
                       {/* Contrat */}
-                      <p className="text-sm text-muted-foreground mb-3">
-                        {exp.contract}
-                      </p>
+                      {exp.contract && (
+                        <p className="mb-4 inline-block rounded-lg bg-secondary px-3 py-1.5 text-xs font-medium text-secondary-foreground">
+                          {exp.contract}
+                        </p>
+                      )}
 
-                      {/* Tâches alignées à gauche */}
-                      <ul className="list-disc list-inside text-sm text-muted-foreground text-left space-y-1 w-full max-w-[18rem]">
+                      {/* Tâches */}
+                      <ul className="text-sm text-muted-foreground space-y-2">
                         {exp.tasks.map((task, i) => (
-                          <li key={i}>{task}</li>
+                          <li key={i} className="flex gap-2.5">
+                            <span className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-primary/70" />
+                            <span>{task}</span>
+                          </li>
                         ))}
                       </ul>
                     </div>
-                  </div>
+                  </Reveal>
                 </div>
               );
             })}

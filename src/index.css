@@ -4,14 +4,21 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+
   --color-border: hsl(var(--border));
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
 
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-accent: hsl(var(--accent));
 
   --color-card: hsl(var(--card));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted-foreground: hsl(var(--muted-foreground));
 
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
@@ -21,6 +28,7 @@
   --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.6s forwards;
   --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
   --animate-meteor: meteor 5s linear infinite;
+  --animate-scroll-dot: scroll-dot 1.8s ease-in-out infinite;
 
   @keyframes float {
     0%, 100% {
@@ -35,7 +43,7 @@
       opacity: 1;
     }
     50% {
-      opacity: 0.8;
+      opacity: 0.6;
     }
   }
   @keyframes fade-in {
@@ -61,6 +69,19 @@
       opacity: 0;
     }
   }
+  @keyframes scroll-dot {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(12px);
+      opacity: 0;
+    }
+  }
 }
 
 @layer base {
@@ -69,49 +90,82 @@
   }
   html {
     @apply scroll-smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-background text-foreground transition-colors duration-300;
+    @apply bg-background text-foreground font-sans antialiased transition-colors duration-300;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: hsl(var(--primary) / 0.25);
   }
 
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
+    --background: 220 33% 98%;
+    --foreground: 224 40% 10%;
 
     --card: 0 0% 100%;
+    --secondary: 220 30% 94%;
+    --secondary-foreground: 224 40% 14%;
+    --muted-foreground: 220 12% 40%;
 
-    --primary: 198.75 67.2% 53.33%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 199 78% 42%;
+    --primary-foreground: 0 0% 100%;
+    --accent: 245 70% 58%;
 
-    --border: 214 32% 91%;
+    --border: 220 22% 89%;
   }
 
   .dark {
-    --background: 222 47% 4%;
-    --foreground: 213 31% 91%;
+    --background: 225 45% 4%;
+    --foreground: 215 30% 92%;
 
-    --card: 222 47% 8%;
+    --card: 224 40% 8%;
+    --secondary: 224 35% 10%;
+    --secondary-foreground: 215 30% 92%;
+    --muted-foreground: 218 15% 66%;
 
     --primary: 198.75 67.2% 53.33%;
-    --primary-foreground: 213 31% 91%;
+    --primary-foreground: 225 45% 6%;
+    --accent: 250 85% 72%;
 
-    --border: 217 33% 20%;
+    --border: 222 30% 16%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
 @utility container {
   margin-inline: auto;
-  padding-inline: 2rem;
+  padding-inline: 0;
 
   @media (width >= 640px) {
     max-width: 640px;
+    padding-inline: 1rem;
   }
   @media (width >= 768px) {
     max-width: 768px;
   }
   @media (width >= 1024px) {
     max-width: 1024px;
+    padding-inline: 1.5rem;
   }
   @media (width >= 1280px) {
     max-width: 1280px;
@@ -121,24 +175,57 @@
   }
 }
 
+@utility text-gradient {
+  background-image: linear-gradient(110deg, hsl(var(--primary)) 10%, hsl(var(--accent)) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 @utility text-glow {
   @apply relative;
-  text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+  text-shadow: 0 0 18px hsl(var(--primary) / 0.45);
+}
+
+/* Surface "verre" utilisée pour toutes les cartes */
+@utility surface {
+  @apply rounded-2xl border border-border;
+  background-color: hsl(var(--card) / 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 1px 2px hsl(224 40% 10% / 0.04), 0 8px 24px -12px hsl(224 40% 10% / 0.12);
 }
 
 @utility card-hover {
-  @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
+  @apply transition-all duration-300 ease-out;
+  &:hover {
+    transform: translateY(-4px);
+    border-color: hsl(var(--primary) / 0.45);
+    box-shadow: 0 18px 40px -18px hsl(var(--primary) / 0.45);
+  }
 }
 
 @utility gradient-border {
-  @apply relative rounded-md;
-  background: linear-gradient(to right, hsl(var(--card)), hsl(var(--card)));
-  background-clip: padding-box;
+  @apply relative rounded-2xl;
+  background:
+    linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
+    linear-gradient(135deg, hsl(var(--primary) / 0.6), hsl(var(--border)) 40%, hsl(var(--border)) 60%, hsl(var(--accent) / 0.6)) border-box;
   border: 1px solid transparent;
 }
 
 @utility cosmic-button {
-  @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium transition-all duration-300 hover:shadow-[0_0_10px_rgba(139,92,246,0.5)] hover:scale-105 active:scale-95;
+  @apply inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full text-sm font-semibold tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98];
+  background-image: linear-gradient(110deg, hsl(var(--primary)), hsl(var(--accent)));
+  box-shadow: 0 10px 30px -10px hsl(var(--primary) / 0.7);
+  &:hover {
+    box-shadow: 0 14px 38px -10px hsl(var(--accent) / 0.75);
+  }
+}
+
+@utility icon-tile {
+  @apply inline-flex items-center justify-center text-primary;
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.16), hsl(var(--accent) / 0.12));
+  box-shadow: inset 0 0 0 1px hsl(var(--primary) / 0.2);
 }
 
 @utility star {

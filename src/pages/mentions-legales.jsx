@@ -1,15 +1,19 @@
 import React from 'react'
+import { ArrowLeft } from 'lucide-react'
 
 const LegalNoticePage = () => {
   return (
-    <main className="max-w-4xl p-6 text-left">
-      <article>
-        <h1 className="text-primary text-4xl font-extrabold mb-8 uppercase">
+    <main className="min-h-screen px-4 py-10 sm:py-16 text-left">
+      <a href="/" className="mx-auto mb-6 flex max-w-4xl items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+        <ArrowLeft className="h-4 w-4" /> Portfolio de Maxime GOUGAT
+      </a>
+      <article className="surface mx-auto max-w-4xl p-6 sm:p-10 md:p-12 leading-relaxed [&_section]:border-t [&_section]:border-border [&_section]:pt-6 [&_a]:break-words">
+        <h1 className="text-gradient text-3xl sm:text-4xl font-extrabold mb-8 uppercase">
           MENTIONS LÉGALES
         </h1>
 
         <section className="mb-6">
-          <h2 className="text-primary text-2xl font-bold mb-4 uppercase">
+          <h2 className="text-primary text-xl sm:text-2xl font-bold mb-4 uppercase">
             1. ÉDITEUR DU SITE
           </h2>
           <p>
@@ -27,7 +31,7 @@ const LegalNoticePage = () => {
         </section>
 
         <section className="mb-6">
-          <h2 className="text-primary text-2xl font-bold mb-4 uppercase">
+          <h2 className="text-primary text-xl sm:text-2xl font-bold mb-4 uppercase">
             2. HÉBERGEUR DU SITE
           </h2>
           <ul className="list-disc list-inside space-y-1">
@@ -41,7 +45,7 @@ const LegalNoticePage = () => {
         </section>
 
         <section className="mb-6">
-          <h2 className="text-primary text-2xl font-bold mb-4 uppercase">
+          <h2 className="text-primary text-xl sm:text-2xl font-bold mb-4 uppercase">
             3. PROPRIÉTÉ INTELLECTUELLE
           </h2>
           <p>
@@ -53,7 +57,7 @@ const LegalNoticePage = () => {
         </section>
 
         <section className="mb-6">
-          <h2 className="text-primary text-2xl font-bold mb-4 uppercase">
+          <h2 className="text-primary text-xl sm:text-2xl font-bold mb-4 uppercase">
             4. RESPONSABILITÉ
           </h2>
           <p>
@@ -67,7 +71,7 @@ const LegalNoticePage = () => {
         </section>
 
         <section className="mb-6">
-          <h2 className="text-primary text-2xl font-bold mb-4 uppercase">
+          <h2 className="text-primary text-xl sm:text-2xl font-bold mb-4 uppercase">
             5. LIENS HYPERTEXTES
           </h2>
           <p>
@@ -77,7 +81,7 @@ const LegalNoticePage = () => {
         </section>
 
         <section>
-          <h2 className="text-primary text-2xl font-bold mb-4 uppercase">
+          <h2 className="text-primary text-xl sm:text-2xl font-bold mb-4 uppercase">
             6. DROIT APPLICABLE
           </h2>
           <p>

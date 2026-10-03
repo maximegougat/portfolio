@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "motion/react";
+import { ArrowUpRight, CalendarDays } from "lucide-react";
 import { RocketIcon } from "./ui/rocket";
+import { SectionHeading } from "./ui/section-heading";
+import { FilterTabs } from "./ui/filter-tabs";
+
 
 // Liste des formations
 const formations = [
@@ -149,91 +153,93 @@ export const FormationsSection = () => {
     .sort((a, b) => getSortableDate(b.date) - getSortableDate(a.date));
 
   return (
-    <section id="formations" className="py-24 px-4 relative bg-secondary/30">
-      <div className="container mx-auto max-w-5xl">
-        <div className="flex justify-center mb-4">
-          <RocketIcon size={50} className="text-primary" />
-        </div>
-
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Mes <span className="text-primary">formations</span>
-        </h2>
+    <section id="formations" className="py-20 md:py-28 px-4 relative bg-secondary/40">
+      <div className="container mx-auto max-w-6xl">
+        <SectionHeading icon={RocketIcon}>
+          Mes <span className="text-gradient">formations</span>
+        </SectionHeading>
 
         {/* Filtres */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={cn(
-                "px-5 py-2 rounded-full transition-colors duration-300",
-                activeCategory === category
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary/70 text-foreground hover:bg-secondary"
-              )}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+        <FilterTabs
+          id="formations"
+          categories={categories}
+          active={activeCategory}
+          onChange={setActiveCategory}
+        />
 
         {/* Cartes */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredFormations.map((formation, key) => (
-            <div
-              key={key}
-              className="bg-card rounded-lg shadow-xs flex flex-col card-hover transition-transform hover:scale-105"
-            >
-              {/* HEADER */}
-              <div className="h-16 flex items-center justify-center border-b">
-                {formation.logo && (
-                  <a href={formation.website} target="_blank" rel="noopener noreferrer">
-                    <img
-                      src={formation.logo}
-                      alt={formation.organization}
-                      className="w-12 h-12 object-contain"
-                    />
-                  </a>
-                )}
-              </div>
+        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <AnimatePresence mode="popLayout">
+            {filteredFormations.map((formation) => (
+              <motion.div
+                key={formation.name}
+                layout
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.3 }}
+                className="surface card-hover p-5 sm:p-6 flex flex-col text-left"
+              >
+                {/* HEADER */}
+                <div className="flex items-start justify-between gap-3 mb-5">
+                  {formation.logo && (
+                    <a
+                      href={formation.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white p-2 ring-1 ring-border"
+                    >
+                      <img
+                        src={formation.logo}
+                        alt={formation.organization}
+                        loading="lazy"
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </a>
+                  )}
+                  <span className="rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-wider text-primary">
+                    {formation.category}
+                  </span>
+                </div>
 
-              {/* TITLE */}
-              <div className="h-[120px] flex flex-col justify-center items-center text-center px-4">
-                <span className="font-semibold leading-snug line-clamp-4">
+                {/* TITLE */}
+                <h3 className="font-sans font-semibold leading-snug">
                   {formation.name}
-                </span>
-                <span className="text-xs text-muted-foreground mt-1">
+                </h3>
+                <span className="text-sm text-muted-foreground mt-1">
                   {formation.organization}
                 </span>
-              </div>
 
-              {/* META */}
-              <div className="h-10 flex items-center justify-center text-sm text-muted-foreground">
-                {formation.date}
-              </div>
-
-              {/* ACTIONS / COMMENT */}
-              <div className="h-16 flex flex-col items-center justify-center gap-2 px-4 pb-3">
-                {formation.presentationLink && (
-                  <a
-                    href={formation.presentationLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-primary hover:underline"
-                  >
-                    Présentation
-                  </a>
-                )}
-
+                {/* COMMENT */}
                 {formation.comment && (
-                  <span className="text-xs text-muted-foreground text-center">
+                  <span className="mt-4 self-start rounded-lg bg-secondary px-3 py-1.5 text-xs font-medium text-secondary-foreground">
                     {formation.comment}
                   </span>
                 )}
-              </div>
-            </div>
-          ))}
-        </div>
+
+                {/* META / ACTIONS */}
+                <div className="flex-1 min-h-5" />
+                <div className="pt-4 flex flex-wrap items-center justify-between gap-3 border-t border-border/70">
+                  <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+                    <CalendarDays className="h-4 w-4" />
+                    {formation.date}
+                  </span>
+                  {formation.presentationLink && (
+                    <a
+                      href={formation.presentationLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-1 text-sm font-medium text-primary"
+                    >
+                      Présentation
+                      <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </a>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );

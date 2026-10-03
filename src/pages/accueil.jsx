@@ -1,9 +1,7 @@
-import { ThemeToggle } from "../components/Thème"
 import { StarBackground } from "../components/StarBackground"
 import { Navbar } from "../components/Navbar"
 import { HeroSection } from "../components/Accueil"
 import { AboutSection } from "../components/A propos"
-import { IdCardIcon } from "@/components/ui/id-card"
 import { SkillsSection } from "@/components/Compétences"
 import { ProjectsSection } from "@/components/Projets"
 import { ContactSection } from "@/components/Contact"
@@ -13,16 +11,13 @@ import { FormationsSection } from "@/components/Formations"
 
 export const Home = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      
-      {/* Theme toggle */}
-        <ThemeToggle />
+    <div className="relative min-h-screen bg-background text-foreground overflow-x-clip">
       {/* Background effects */}
       <StarBackground />
-      {/* Navbar */}
+      {/* Navbar (inclut le bouton de thème) */}
       <Navbar/>
       {/* Main content */}
-      <main>
+      <main className="relative z-10">
         <HeroSection/>
         <AboutSection/>
         <FormationsSection/>

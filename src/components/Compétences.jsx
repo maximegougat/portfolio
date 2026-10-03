@@ -1,6 +1,9 @@
 import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "motion/react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import { RocketIcon } from "./ui/rocket";
+import { SectionHeading } from "./ui/section-heading";
+import { FilterTabs } from "./ui/filter-tabs";
 
 const skills = [
   { name: "Autonomie", category: "Soft skills", icon: "" },
@@ -34,52 +37,54 @@ export const SkillsSection = () => {
   );
 
   return (
-    <section id="competences" className="py-24 px-4 relative bg-secondary/30">
-      <div className="container mx-auto max-w-5xl">
-        <div className="flex justify-center">
-          <RocketIcon size={50} className="text-primary"/>
-        </div>
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Mes <span className="text-primary">compétences</span>
-        </h2>
+    <section id="competences" className="py-20 md:py-28 px-4 relative bg-secondary/40">
+      <div className="container mx-auto max-w-6xl">
+        <SectionHeading icon={RocketIcon}>
+          Mes <span className="text-gradient">compétences</span>
+        </SectionHeading>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((category, key) => (
-            <button
-              key={key}
-              onClick={() => setActiveCategory(category)}
-              className={cn(
-                "px-5 py-2 rounded-full transition-colors duration-300",
-                activeCategory === category
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary/70 text-foreground hover:bg-secondary"
-              )}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+        <FilterTabs
+          id="competences"
+          categories={categories}
+          active={activeCategory}
+          onChange={setActiveCategory}
+        />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredSkills.map((skill, key) => (
-            <a
-              key={key}
-              href={skill.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-card p-6 rounded-lg shadow-xs flex items-center justify-center gap-3 card-hover"
-            >
-              {skill.icon && (
-                <img
-                  src={skill.icon}
-                  alt={skill.name}
-                  className="w-8 h-8 object-contain"
-                />
-              )}
-              <span className="font-semibold text-lg">{skill.name}</span>
-            </a>
-          ))}
-        </div>
+        <motion.div layout className="grid grid-cols-1 min-[440px]:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
+          <AnimatePresence mode="popLayout">
+            {filteredSkills.map((skill) => (
+              <motion.a
+                key={skill.name}
+                layout
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.3 }}
+                href={skill.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group surface card-hover p-4 sm:p-5 flex items-center gap-4 text-left"
+              >
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white ring-1 ring-border p-2">
+                  {skill.icon ? (
+                    <img
+                      src={skill.icon}
+                      alt={skill.name}
+                      loading="lazy"
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  ) : (
+                    <Sparkles className="h-5 w-5 text-primary" />
+                  )}
+                </span>
+                <span className="font-semibold text-base md:text-lg leading-snug">{skill.name}</span>
+                {skill.link && (
+                  <ArrowUpRight className="ml-auto h-4 w-4 shrink-0 text-muted-foreground opacity-0 transition-all group-hover:opacity-100 group-hover:text-primary" />
+                )}
+              </motion.a>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );
